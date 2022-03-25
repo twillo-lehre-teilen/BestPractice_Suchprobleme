@@ -85,9 +85,50 @@ Es gibt zwei Möglichkeiten lineare Datenstrukturen zu realisieren. Entweder Arr
 
 ### Sequentielle Suche
 
+<!--  style="background-color:#A6D492;" -->
+> ## Ziel dieses Kapitels:
+>
+> Nach diesem Kapitel sollten Sie die Vorgehensweise von der Sequentiellen Suche verstanden haben, sowie die einzelnen Schritte benennen und anwenden können. Außerdem sollten Sie in der Lage sein den Algorithmus schrittweise zu implementieren.
+
+---
+
+<h4>Grundlegende Idee</h4>
+
+Dieses Kapitel handelt von der sequentiellen Suche. Die Idee dieses Suchalgorithmus ist, dass zuerst das erste Elemente der Liste mit dem gesuchten Elemente verglichen wird, wenn sie übereinstimmen wird der aktuelle Index zurückgegeben. Wenn nicht wird der Schritt mit dem nächsten Element wiederholt. Sollte das gesuchte Element bis zum Ende der Folge nicht gefunden werden, war die Suche erfolglos und -1 wird zurückgegeben.
+
+#### Beispiel
+
+#### Implementierung
+
 ### Binäre Suche
 
+<!--  style="background-color:#A6D492;" -->
+> ## Ziel dieses Kapitels:
+>
+> Nach diesem Kapitel sollten Sie die Vorgehensweise von der Binären Suche verstanden haben, sowie die einzelnen Schritte benennen und anwenden können. Außerdem sollten Sie in der Lage sein den Algorithmus schrittweise zu implementieren.
+
+---
+
+<h4>Grundlegende Idee</h4>
+
+#### Beispiel
+
+#### Implementierung
+
 ### Fibonacci-Suche
+
+<!--  style="background-color:#A6D492;" -->
+> ## Ziel dieses Kapitels:
+>
+> Nach diesem Kapitel sollten Sie die Vorgehensweise von der Fibonacci-Suche Suche verstanden haben, sowie die einzelnen Schritte benennen und anwenden können. Außerdem sollten Sie in der Lage sein den Algorithmus schrittweise zu implementieren.
+
+---
+
+<h4>Grundlegende Idee</h4>
+
+#### Beispiel
+
+#### Implementierung
 
 ## Suchen in Texten
 
