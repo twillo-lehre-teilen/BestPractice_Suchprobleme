@@ -1,0 +1,64 @@
+.quiz{
+font-size: inherit;
+background-color: #F0F2F6;
+color: #0A1F40;
+width: 150px;
+padding: 10px 10px;
+margin-right: 10px;
+cursor: pointer;
+text-align: center;
+float: left;
+display: block;
+overflow: hidden;
+border: none;
+}
+.quiz:focus, .quiz:hover{
+background-color: #D1D8E1;
+}
+.ergebnis{
+font-size: inherit;
+background-color: #F0F2F6;
+color: #0A1F40;
+padding: 10px 10px;
+margin-right: 10px;
+margin-bottom: 10px;
+text-align: left;
+display: none;
+overflow: hidden;
+border: none;
+border-radius: 8px;
+}
+.button{
+font-size: inherit;
+background-color: #F0F2F6;
+color: #0A1F40;
+width: 100%;
+padding: 18px 18px;
+cursor: pointer;
+text-align: left;
+overflow: hidden;
+border: none;
+}
+.panel{
+font-size: inherit;
+background-color: #FAFAFC;
+border-radius: 10px;
+width: 100%;
+padding: 0px;
+text-align: left;
+overflow: hidden;
+border: none;
+}
+.panel-content{
+font-size: inherit;
+background-color: #FAFAFC;
+color: #0A1F40;
+width: 95%;
+padding: 10px;
+text-align: left;
+overflow: auto;
+border: none;
+}
+.button:focus, .button:hover{
+background-color: #D1D8E1;
+}
