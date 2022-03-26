@@ -139,16 +139,19 @@ Falls Sie Hilfe beim Einstieg in Python brauchen, finden Sie diese z.B. [hier](h
 
 <!-- data-readOnly="false" -->
 ``` python
+# die zu durchsuchende liste
 list = [4,8,2,6,7,3,15,32,96,47,1,55,0,17]
 
 def seqSearch(input):
   index = None
-  #your code goes here ...
+  # your code goes here ...
   for i in range(0,len(list)):
     if input == list[i]:
       index = i
+      break
   if index == None:
     index = -1
+
   return list, input, index
 ```
 <!-- data-readOnly="True"  style="display:block"-->
@@ -156,7 +159,6 @@ def seqSearch(input):
 from SeqSearch import seqSearch
 
 if __name__ == "__main__":
-    # only important code should be visible
     print "Bitte geben Sie eine beliebige zu suchende Zahl ein:"
     input = input()
     list, number, index = seqSearch(input)
