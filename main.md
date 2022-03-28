@@ -59,7 +59,7 @@ In dieser Lektion geben wir einen Überblick über das Thema Suchen. Suchproblem
 <!--  style="background-color:#A6D492;" -->
 > ## Ziel dieses Kapitels:
 >
-> Nach diesem Kapitel sollten Sie die Vorgehensweisen von vorgestellten Suchalgorithmen verstanden haben, sowie die einzelnen Schritte benennen und anwenden können. Außerdem sollten Sie in der Lage sein die Algorithmen schrittweise zu implementieren (**Python**).
+> Nach diesem Kapitel sollten Sie die Vorgehensweisen von den vorgestellten Suchalgorithmen verstanden haben, sowie die einzelnen Schritte benennen und anwenden können. Außerdem sollten Sie in der Lage sein die Algorithmen schrittweise zu implementieren (**Python**).
 
 ---
 
@@ -140,32 +140,30 @@ Falls Sie Hilfe beim Einstieg in Python brauchen, finden Sie diese z.B. [hier](h
 <!-- data-readOnly="false" -->
 ``` python
 # die zu durchsuchende liste
-list = [4,8,2,6,7,3,15,32,96,47,1,55,0,17]
+LIST = [4,8,-5,2,6,92,7,3,15,32,96,47,1,55,0,17]
 
 def seqSearch(input):
-  index = None
   # your code goes here ...
+  index = -1
   for i in range(0,len(list)):
-    if input == list[i]:
+    if input == LIST[i]:
       index = i
       break
-  if index == None:
-    index = -1
 
-  return list, input, index
+  return index
 ```
 <!-- data-readOnly="True"  style="display:block"-->
 ``` python -main.py
-from SeqSearch import seqSearch
+from SeqSearch import seqSearch, LIST
 
 if __name__ == "__main__":
     print "Bitte geben Sie eine beliebige zu suchende Zahl ein:"
     input = input()
-    list, number, index = seqSearch(input)
+    index = seqSearch(input)
     if index != -1:
-      print "Die Zahl {} befindet sich in der Liste \n{} \nan dem Index {}.".format(number, list, index)
+      print "Die Zahl {} befindet sich in der Liste \n{} \nan dem Index {}.".format(input, LIST, index)
     else:
-      print "Die Zahl {} befindet sich nicht in der Liste \n{}.".format(number, list)
+      print "Die Zahl {} befindet sich nicht in der Liste \n{}.".format(input, LIST)
 ```
 @LIA.eval(`["SeqSearch.py", "main.py"]`, `python -m compileall .`, `python main.pyc`)
 
@@ -173,26 +171,24 @@ if __name__ == "__main__":
 <summary class="button">**Schritt 1:**</summary>
 
 <p class="panel-content">
-<i>Schreiben Sie einen Codeabschnitt, so dass alle Elemente der Liste nacheinander (von links nach rechts) durchlaufen werden. Die $index$ variable soll dabei in jedem Druchlauf auf die aktuelle Durchlaufnummer gesetzt werden (im $i$-ten Durchlauf also auf $i$).
-</i>
+Schreiben Sie einen Codeabschnitt, so dass alle Elemente der Liste nacheinander (von links nach rechts) durchlaufen werden. Die $index$ variable soll dabei in jedem Druchlauf auf die aktuelle Durchlaufnummer gesetzt werden (im $i$-ten Durchlauf also auf $i$).
+
+Um die Funktionalität Ihres Codes zu überprüfen, lassen Sie sich die $index$ variable in jedem Durchlauf auf der Konsole ausgeben.
 </p>
 </details>
 
 <details class="panel">
 <summary class="button">**Schritt 2:**</summary>
 
-<p class="panel-content">
-<i>Ergänzen Sie Ihren Code so, dass in jedem Durchlauf das jeweils betrachtete Element der Liste (im $i$-ten Durchlauf also das an $i$-ter Stelle) mit dem zu suchendem Element verglichen wird. Sind es die gleichen Elemente soll die $index$ variable auf $i$ gesetzt und die Schleife beendet werden.
-</i>
+<p class="panel-content">Ergänzen Sie Ihren Code so, dass in jedem Durchlauf das jeweils betrachtete Element der Liste (im $i$-ten Durchlauf also das an $i$-ter Stelle) mit dem zu suchendem Element verglichen wird. Sind es die gleichen Elemente soll die $index$ variable auf $i$ gesetzt und die Schleife beendet werden.
 </p>
 </details>
 
 <details class="panel">
 <summary class="button">**Schritt 3:**</summary>
 
-<p class="panel-content" >
-<i>Jetzt soll das Programm so erweitert werden, dass bei dem Fall, dass das zu suchende Element nicht in der Liste vorkommt ein Index von *-1* zurückgegeben wird.
-</i>
+<p class="panel-content">
+Jetzt soll das Programm so erweitert werden, dass bei dem Fall, dass das zu suchende Element nicht in der Liste vorkommt ein Index von *-1* zurückgegeben wird.
 </p>
 </details>
 
@@ -207,9 +203,91 @@ if __name__ == "__main__":
 
 <h4>Grundlegende Idee</h4>
 
+Dieses Kapitel behandelt die binäre Suche. Wir stellen uns die Frage, wie die Suche effizienter werden könnte. Das Prinzip der binären Suche ist zuerst den mittleren Eintrag zu wählen und zu prüfen ob sich der gesuchte Wert in der linken oder rechten Hälfte der Liste befindet. Anschließend fährt man rekursiv mit der Hälfte fort, in der sich der Eintrag befindet. **Voraussetzung** für das binäre Suchverfahren ist, dass die Folge sortiert ist. Das Suchverfahren entspricht dem Entwurfsmuster von *Divide-and-Conquer*.
+
+
 #### Beispiel
 
 #### Implementierung
+
+In diesem Kapitel werden Sie den Algorithmus selber schrittweise in Python implementieren. Der Code-Rahmen und Möglichkeiten Ihren Code zu testen sind jeweils schon gegeben, Sie müssen nur an den mit *"your code goes here ..."* gekennzeichneten Stellen ihren Code einfügen. Bei Bedarf ist es auch möglich eigene Testfälle zu schreiben.
+
+Falls Sie Hilfe beim Einstieg in Python brauchen, finden Sie diese z.B. [hier](https://learnxinyminutes.com/docs/de-de/python-de/), falls es ganz schnell gehen muss oder [hier](https://www.python-lernen.de/), falls es etwas ausführlicher sein soll.
+
+<!--  style="background-color:#A6D492;" -->
+> ## Ziel dieses Kapitels
+>
+> Nach diesem Kapitel sollten Sie in der Lage sein, die Binäre Suche selbstständig zu implementieren.
+
+##### Code
+
+<!-- style="background-color:lightblue;" -->
+> **Bedienungsanleitung des Code-Blocks:**
+>
+> - Zum ausführen des Codes müssen Sie den Button links unterhalb des Code-Blocks anklicken. Dadurch wird der gesamte Inhalt kompiliert und ausgeführt. Falls Sie anschließend Änderungen an Ihrem Code vornehmen, müssen Sie darauf achten den Button erneut anzuklicken, damit diese gespeichert und neu kompiliert werden.
+>
+>- Mithilfe der Pfeiltasten rechts unterhalb des Blocks können Sie zwischen Ihren Speicherständen vor und zurück wechseln, um ggf. Änderungen rückgängig zu machen oder ältere Zustände wiederherzustellen.
+
+<!-- data-readOnly="false" -->
+``` python
+# die zu durchsuchende sortierte liste
+LIST = [-5,0,1,2,3,4,6,7,8,15,17,32,47,55,92,96]
+
+def binarySearch(input):
+  # your code goes here ...
+  return binarySearchRecursiv(input, 0, len(LIST)-1)
+
+def binarySearchRecursiv(input, low, up):
+  # your code goes here ...
+  m = (low+up)/2
+  if LIST[m] == input:
+    return m
+  if low == up:
+    return -1
+  if LIST[m] > input:
+    return binarySearchRecursiv(input, low, m-1)
+  return binarySearchRecursiv(input,m+1,up)
+```
+<!-- data-readOnly="True"  style="display:block"-->
+``` python -main.py
+from binarySearch import binarySearch, LIST
+
+if __name__ == "__main__":
+    print "Bitte geben Sie eine beliebige zu suchende Zahl ein:"
+    input = input()
+    index = binarySearch(input)
+    if index != -1:
+      print "Die Zahl {} befindet sich in der Liste \n{} \nan dem Index {}.".format(input, LIST, index)
+    else:
+      print "Die Zahl {} befindet sich nicht in der Liste \n{}.".format(input, LIST)
+```
+@LIA.eval(`["binarySearch.py", "main.py"]`, `python -m compileall .`, `python main.pyc`)
+
+<details class="panel">
+<summary class="button">**Schritt 1:**</summary>
+
+<p class="panel-content">
+Schreiben Sie zunächst die Funktion ***binarySearch()***. Diese bekommt die zu suchende Zahl übergeben und initialisiert die Binäre Suche. Dafür wird die Funktion ***binarySearchRecursiv()*** mit dem kleinstmöglichsten Index ***low*** und dem größtmöglichen Index ***up*** der zur durchsuchenden Liste aufgerufen.
+</p>
+</details>
+
+<details class="panel">
+<summary class="button">**Schritt 2:**</summary>
+
+<p class="panel-content">
+Schreiben Sie als nächstes die Funktion ***binarySearchRecursiv()***, die die zu suchende Zahl, sowie eine untere und obere Schranke des zu durchsuchenden Abschnitts der Liste übergeben bekommt. Zunächst muss die Mitte ***m*** abhängig von den übergebenen Schranken ***low*** und ***up*** berechnet werden. Anschließend wird kontrolliert, ob sich in der Mitte des Abschnitts die gesuchte Zahl befindet. Ist dies der Fall, wird der Index der Mitte ***m*** zurückgegeben, andernfalls wird die Funktion *binarySearchRecursiv()* **rekursiv** auf die Hälfte aufgerufen, in der die zu suchende Zahl zu vermuten ist.
+
+*Hinweis:* Die zu durchsuchende Liste ist sortiert.
+</p>
+</details>
+
+<details class="panel">
+<summary class="button">**Schritt 3:**</summary>
+
+<p class="panel-content" >
+Erweitern Sie zum Abschluss die Funktion ***binarySearchRecursiv()*** nun noch so, dass die Rekursion abgebrochen wird, wenn die beiden übergebenen Schranken identisch sind. Tritt dieser Fall ein, war die Suche erfolglos und es wird *-1* zurückgegeben.
+</p>
+</details>
 
 ### Fibonacci-Suche
 
@@ -222,9 +300,101 @@ if __name__ == "__main__":
 
 <h4>Grundlegende Idee</h4>
 
+Dieses Kapitel behandelt die Fibonacci Suche. Die im vorherigen Kapitel behandelte binäre Suche hat Nachteile. Die binäre Suche ist der am häufigsten verwendete Algorithmus zur Suche in sortierten Arrays. Die Sprünge zu verschiedenen Testpositionen sind allerdings immer recht groß. Dies kann nachteilig sein, wenn das Array nicht vollständig im Speicher vorliegt (oder bei Datenträgertypen wie Kassetten). Außerdem werden neue Positionen durch Division berechnet und je nach Prozessor ist dies eine aufwändigere Operation als Addition und Subtraktion. Daher nehmen wir die Fibonacci Suche als eine weitere Alternative.
+
+> ## Fibonacci Zahlen
+>
+> Zur Erinnerung, [die Folge der Fibonacci Zahlen](https://de.wikipedia.org/wiki/Fibonacci-Folge)  $F_{n}$ für $n \ge 0$ ist definiert durch:
+>
+>> - $F_0 = 0$
+>> - $F_1 = 1$
+>> - $F_2 = 1$
+>> - $F_i = F_{i-1} + F_{i-2}$ für $i > 1$
+>
+> Anstatt wie bei der binären Suche das Array in gleich große Teile zu teilen, wird das Array in Teilen entsprechend der Fibonacci-Zahlen geteilt Es wird zunächst das Element an Indexposition m betrachtet, wobei m die größte Fibonaccizahl ist, die kleiner als die Arraylänge ist. Nun fährt man rekursiv mit dem entsprechenden Teilarray fort.
+
 #### Beispiel
 
 #### Implementierung
+
+In diesem Kapitel werden Sie den Algorithmus selber schrittweise in Python implementieren. Der Code-Rahmen und Möglichkeiten Ihren Code zu testen sind jeweils schon gegeben, Sie müssen nur an den mit *"your code goes here ..."* gekennzeichneten Stellen ihren Code einfügen. Bei Bedarf ist es auch möglich eigene Testfälle zu schreiben.
+
+Falls Sie Hilfe beim Einstieg in Python brauchen, finden Sie diese z.B. [hier](https://learnxinyminutes.com/docs/de-de/python-de/), falls es ganz schnell gehen muss oder [hier](https://www.python-lernen.de/), falls es etwas ausführlicher sein soll.
+
+<!--  style="background-color:#A6D492;" -->
+> ## Ziel dieses Kapitels
+>
+> Nach diesem Kapitel sollten Sie in der Lage sein, die Fibonacci Suche selbstständig zu implementieren.
+
+##### Code
+
+<!-- style="background-color:lightblue;" -->
+> **Bedienungsanleitung des Code-Blocks:**
+>
+> - Zum ausführen des Codes müssen Sie den Button links unterhalb des Code-Blocks anklicken. Dadurch wird der gesamte Inhalt kompiliert und ausgeführt. Falls Sie anschließend Änderungen an Ihrem Code vornehmen, müssen Sie darauf achten den Button erneut anzuklicken, damit diese gespeichert und neu kompiliert werden.
+>
+>- Mithilfe der Pfeiltasten rechts unterhalb des Blocks können Sie zwischen Ihren Speicherständen vor und zurück wechseln, um ggf. Änderungen rückgängig zu machen oder ältere Zustände wiederherzustellen.
+
+<!-- data-readOnly="false" -->
+``` python
+# die zu durchsuchende sortierte liste
+LIST = [-5,0,1,2,3,4,6,7,8,15,17,32,47,55,92,96]
+
+def fibonacciSearch(input):
+  # your code goes here ...
+  return fibonacciSearchRecursiv(input, 0, len(LIST)-1)
+
+def fibonacciSearchRecursiv(input, low, up):
+  # your code goes here ...
+  m = (low+up)/2
+  if LIST[m] == input:
+    return m
+  if low == up:
+    return -1
+  if LIST[m] > input:
+    return fibonacciSearchRecursiv(input, low, m-1)
+  return fibonacciSearchRecursiv(input,m+1,up)
+```
+<!-- data-readOnly="True"  style="display:block"-->
+``` python -main.py
+from fibonacciSearch import fibonacciSearch, LIST
+
+if __name__ == "__main__":
+    print "Bitte geben Sie eine beliebige zu suchende Zahl ein:"
+    input = input()
+    index = fibonacciSearch(input)
+    if index != -1:
+      print "Die Zahl {} befindet sich in der Liste \n{} \nan dem Index {}.".format(input, LIST, index)
+    else:
+      print "Die Zahl {} befindet sich nicht in der Liste \n{}.".format(input, LIST)
+```
+@LIA.eval(`["fibonacciSearch.py", "main.py"]`, `python -m compileall .`, `python main.pyc`)
+
+<details class="panel">
+<summary class="button">**Schritt 1:**</summary>
+
+<p class="panel-content">
+Schreiben Sie zunächst die Funktion ***binarySearch()***. Diese bekommt die zu suchende Zahl übergeben und initialisiert die Binäre Suche. Dafür wird die Funktion ***binarySearchRecursiv()*** mit dem kleinstmöglichsten Index ***low*** und dem größtmöglichen Index ***up*** der zur durchsuchenden Liste aufgerufen.
+</p>
+</details>
+
+<details class="panel">
+<summary class="button">**Schritt 2:**</summary>
+
+<p class="panel-content">
+Schreiben Sie als nächstes die Funktion ***binarySearchRecursiv()***, die die zu suchende Zahl, sowie eine untere und obere Schranke des zu durchsuchenden Abschnitts der Liste übergeben bekommt. Zunächst muss die Mitte ***m*** abhängig von den übergebenen Schranken ***low*** und ***up*** berechnet werden. Anschließend wird kontrolliert, ob sich in der Mitte des Abschnitts die gesuchte Zahl befindet. Ist dies der Fall, wird der Index der Mitte ***m*** zurückgegeben, andernfalls wird die Funktion *binarySearchRecursiv()* **rekursiv** auf die Hälfte aufgerufen, in der die zu suchende Zahl zu vermuten ist.
+
+*Hinweis:* Die zu durchsuchende Liste ist sortiert.
+</p>
+</details>
+
+<details class="panel">
+<summary class="button">**Schritt 3:**</summary>
+
+<p class="panel-content" >
+Erweitern Sie zum Abschluss die Funktion ***binarySearchRecursiv()*** nun noch so, dass die Rekursion abgebrochen wird, wenn die beiden übergebenen Schranken identisch sind. Tritt dieser Fall ein, war die Suche erfolglos und es wird *-1* zurückgegeben.
+</p>
+</details>
 
 ## Suchen in Texten
 
