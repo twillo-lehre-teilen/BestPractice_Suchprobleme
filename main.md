@@ -477,9 +477,74 @@ Nun betrachten wir einen naiven Algorithmus zur Textsuche. Und zwar die direkte 
 
 #### Implementierung
 
+In diesem Kapitel werden Sie den Algorithmus selber schrittweise in Python implementieren. Der Code-Rahmen und Möglichkeiten Ihren Code zu testen sind jeweils schon gegeben, Sie müssen nur an den mit *"your code goes here ..."* gekennzeichneten Stellen ihren Code einfügen. Bei Bedarf ist es auch möglich eigene Testfälle zu schreiben.
+
+Falls Sie Hilfe beim Einstieg in Python brauchen, finden Sie diese z.B. [hier](https://learnxinyminutes.com/docs/de-de/python-de/), falls es ganz schnell gehen muss oder [hier](https://www.python-lernen.de/), falls es etwas ausführlicher sein soll.
+
+<!--  style="background-color:#A6D492;" -->
+> ## Ziel dieses Kapitels
+>
+> Nach diesem Kapitel sollten Sie in der Lage sein, den naiven Alogorithmus zur Textsuche selbstständig zu implementieren.
+
 ##### Code
 
-### Knuth-Morris-Path
+<!-- style="background-color:lightblue;" -->
+> **Bedienungsanleitung des Code-Blocks:**
+>
+> - Zum ausführen des Codes müssen Sie den Button links unterhalb des Code-Blocks anklicken. Dadurch wird der gesamte Inhalt kompiliert und ausgeführt. Falls Sie anschließend Änderungen an Ihrem Code vornehmen, müssen Sie darauf achten den Button erneut anzuklicken, damit diese gespeichert und neu kompiliert werden.
+>
+>- Mithilfe der Pfeiltasten rechts unterhalb des Blocks können Sie zwischen Ihren Speicherständen vor und zurück wechseln, um ggf. Änderungen rückgängig zu machen oder ältere Zustände wiederherzustellen.
+
+<!-- data-readOnly="false" -->
+``` python
+# die zu durchsuchende liste
+LIST = [4,8,-5,2,6,92,7,3,15,32,96,47,1,55,0,17]
+
+def seqSearch(input):
+  # your code goes here ...
+
+  return index
+```
+<!-- data-readOnly="True"  style="display:block"-->
+``` python -main.py
+from SeqSearch import seqSearch, LIST
+
+if __name__ == "__main__":
+    print "Bitte geben Sie eine beliebige zu suchende Zahl ein:"
+    input = input()
+    index = seqSearch(input)
+    if index != -1:
+      print "Die Zahl {} befindet sich in der Liste \n{} \nan dem Index {}.".format(input, LIST, index)
+    else:
+      print "Die Zahl {} befindet sich nicht in der Liste \n{}.".format(input, LIST)
+```
+@LIA.eval(`["SeqSearch.py", "main.py"]`, `python -m compileall .`, `python main.pyc`)
+
+<details class="panel">
+<summary class="button">**Schritt 1:**</summary>
+
+<p class="panel-content">
+
+</p>
+</details>
+
+<details class="panel">
+<summary class="button">**Schritt 2:**</summary>
+
+<p class="panel-content">
+
+</p>
+</details>
+
+<details class="panel">
+<summary class="button">**Schritt 3:**</summary>
+
+<p class="panel-content">
+
+</p>
+</details>
+
+### Knuth-Morris-Pratt
 
 Auf dieser Seite behandeln wir den Algorithmus von Knuth-Morris-Pratt. Die Idee ist, dass bereits gelesene Informationen bei einem Mismatch genutzt werden.
 
@@ -487,4 +552,69 @@ Auf dieser Seite behandeln wir den Algorithmus von Knuth-Morris-Pratt. Die Idee 
 
 #### Implementierung
 
+In diesem Kapitel werden Sie den Algorithmus selber schrittweise in Python implementieren. Der Code-Rahmen und Möglichkeiten Ihren Code zu testen sind jeweils schon gegeben, Sie müssen nur an den mit *"your code goes here ..."* gekennzeichneten Stellen ihren Code einfügen. Bei Bedarf ist es auch möglich eigene Testfälle zu schreiben.
+
+Falls Sie Hilfe beim Einstieg in Python brauchen, finden Sie diese z.B. [hier](https://learnxinyminutes.com/docs/de-de/python-de/), falls es ganz schnell gehen muss oder [hier](https://www.python-lernen.de/), falls es etwas ausführlicher sein soll.
+
+<!--  style="background-color:#A6D492;" -->
+> ## Ziel dieses Kapitels
+>
+> Nach diesem Kapitel sollten Sie in der Lage sein, den Knuth-Morris-Pratt Algorithmus selbstständig zu implementieren.
+
 ##### Code
+
+<!-- style="background-color:lightblue;" -->
+> **Bedienungsanleitung des Code-Blocks:**
+>
+> - Zum ausführen des Codes müssen Sie den Button links unterhalb des Code-Blocks anklicken. Dadurch wird der gesamte Inhalt kompiliert und ausgeführt. Falls Sie anschließend Änderungen an Ihrem Code vornehmen, müssen Sie darauf achten den Button erneut anzuklicken, damit diese gespeichert und neu kompiliert werden.
+>
+>- Mithilfe der Pfeiltasten rechts unterhalb des Blocks können Sie zwischen Ihren Speicherständen vor und zurück wechseln, um ggf. Änderungen rückgängig zu machen oder ältere Zustände wiederherzustellen.
+
+<!-- data-readOnly="false" -->
+``` python
+# die zu durchsuchende liste
+LIST = [4,8,-5,2,6,92,7,3,15,32,96,47,1,55,0,17]
+
+def seqSearch(input):
+  # your code goes here ...
+
+  return index
+```
+<!-- data-readOnly="True"  style="display:block"-->
+``` python -main.py
+from SeqSearch import seqSearch, LIST
+
+if __name__ == "__main__":
+    print "Bitte geben Sie eine beliebige zu suchende Zahl ein:"
+    input = input()
+    index = seqSearch(input)
+    if index != -1:
+      print "Die Zahl {} befindet sich in der Liste \n{} \nan dem Index {}.".format(input, LIST, index)
+    else:
+      print "Die Zahl {} befindet sich nicht in der Liste \n{}.".format(input, LIST)
+```
+@LIA.eval(`["SeqSearch.py", "main.py"]`, `python -m compileall .`, `python main.pyc`)
+
+<details class="panel">
+<summary class="button">**Schritt 1:**</summary>
+
+<p class="panel-content">
+
+</p>
+</details>
+
+<details class="panel">
+<summary class="button">**Schritt 2:**</summary>
+
+<p class="panel-content">
+
+</p>
+</details>
+
+<details class="panel">
+<summary class="button">**Schritt 3:**</summary>
+
+<p class="panel-content">
+
+</p>
+</details>
