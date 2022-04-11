@@ -488,6 +488,3 @@ Auf dieser Seite behandeln wir den Algorithmus von Knuth-Morris-Pratt. Die Idee 
 #### Implementierung
 
 ##### Code
-
-
-<!--dklaus@uni-osnabrueck.de-->
