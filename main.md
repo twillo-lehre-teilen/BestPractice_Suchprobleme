@@ -3,8 +3,6 @@ author:   Lennart Rosseburg für twillo
 
 email:    support.twillo@tib.eu
 
-repository: https://github.com/TorroRosso46/Suchprobleme
-
 comment:  Eine Selbstlerneinheit mit interaktiven Aufgaben für die gängigsten Suchprobleme in der Informatik. Diese Seite ist lizenziert unter der [Lizenz CC-BY-SA (3.0)](https://creativecommons.org/licenses/by-sa/3.0/legalcode).
 
 language: de
@@ -13,9 +11,11 @@ mode:     Textbook
 
 version:  0.0.1
 
-date:     25/03/2022
+date:     12/04/2022
 
-logo:
+logo:     
+
+icon:     docs/twillo_logo.svg
 
 link:     https://cdn.jsdelivr.net/gh/TorroRosso46/Suchprobleme/custom.css
 
@@ -41,6 +41,8 @@ Pyodide:
 > - Dem [Kapitel "Suchen"](https://de.wikiversity.org/wiki/Kurs:Algorithmen_und_Datenstrukturen/Vorlesung/Suchen) aus dem [Kurs "Algorithmen und Datenstrukturen"](https://de.wikiversity.org/wiki/Kurs:Algorithmen_und_Datenstrukturen), von Wikiversity unter der Beteiligung folgender [Autor:innen](https://de.wikiversity.org/w/index.php?title=Kurs:Algorithmen_und_Datenstrukturen/Vorlesung/Sortieren_Grundlagen&action=history), unter der [Lizenz CC-BY-SA (3.0)](https://creativecommons.org/licenses/by-sa/3.0/legalcode).
 >
 > - Dem [Artikel "Difference between List and Array in Python"](https://www.geeksforgeeks.org/difference-between-list-and-array-in-python/), veröffentlicht auf [geeksforgeeks](https://www.geeksforgeeks.org/) von [Yash Chuahan](https://auth.geeksforgeeks.org/user/yashchuahan/articles), unter der [Lizenz CC-BY-SA (4.0)](https://creativecommons.org/licenses/by-sa/4.0/legalcode).
+>
+> - Dem [Artikel "Knuth-Morris-Pratt-Algorithmus"](https://de.wikipedia.org/wiki/Knuth-Morris-Pratt-Algorithmus), veröffentlicht auf [Wikipedia](https://de.wikipedia.org/wiki/Wikipedia:Hauptseite) von den [Autor:innen](https://xtools.wmflabs.org/articleinfo-authorship/de.wikipedia.org/Knuth-Morris-Pratt-Algorithmus?uselang=de) unter der [Lizenz CC-BY-SA (3.0)](https://creativecommons.org/licenses/by-sa/3.0/legalcode).
 
 <!-- style="background-color:transparent;" -->
 > Diese Selbstlerneinheit konzentriert sich auf die Funktionsweise verschiedener Suchalgorithmen und enthält interaktive Aufgaben um das Gelernte zu überprüfen und zu verinnerlichen.
@@ -362,7 +364,7 @@ Falls Sie Hilfe beim Einstieg in Python brauchen, finden Sie diese z.B. [hier](h
 >- Mithilfe der Pfeiltasten rechts unterhalb des Blocks können Sie zwischen Ihren Speicherständen vor und zurück wechseln, um ggf. Änderungen rückgängig zu machen oder ältere Zustände wiederherzustellen.
 
 <!-- data-readOnly="true" -->
-```python +Fibonacci-Folge
+```python -Fibonacci-Folge
 def fib(x):
   # gibt die x-te Fibonacci Zahl zurück
   if x == 0:
@@ -498,27 +500,38 @@ Falls Sie Hilfe beim Einstieg in Python brauchen, finden Sie diese z.B. [hier](h
 <!-- data-readOnly="false" -->
 ``` python
 # die zu durchsuchende liste
-LIST = [4,8,-5,2,6,92,7,3,15,32,96,47,1,55,0,17]
+TEXT = "abababcbababcababcab"
 
-def seqSearch(input):
+def bruteForceSearch(pattern):
   # your code goes here ...
+  textAsList = list(TEXT)
+  patternAsList = list(pattern)
 
-  return index
+  for i in range(len(textAsList) - len(patternAsList) + 1):
+    for j in range(len(patternAsList)):
+      if patternAsList[j] != textAsList[i+j]:
+        break
+      if j == (len(patternAsList)-1):
+        return i
+      j += 1
+    i += 1
+
+  return -1
 ```
 <!-- data-readOnly="True"  style="display:block"-->
 ``` python -main.py
-from SeqSearch import seqSearch, LIST
+from bruteForceSearch import bruteForceSearch, TEXT
 
 if __name__ == "__main__":
-    print "Bitte geben Sie eine beliebige zu suchende Zahl ein:"
-    input = input()
-    index = seqSearch(input)
+    print "Bitte geben Sie eine beliebige zu suchende Zeichenfolge ein:"
+    input = raw_input()
+    index = bruteForceSearch(input)
     if index != -1:
-      print "Die Zahl {} befindet sich in der Liste \n{} \nan dem Index {}.".format(input, LIST, index)
+      print "Die Zeichenfolge {} befindet sich in dem Text \n{} \nan dem Index {}.".format(input, TEXT, index)
     else:
-      print "Die Zahl {} befindet sich nicht in der Liste \n{}.".format(input, LIST)
+      print "Die Zeichenfolge {} befindet sich nicht in dem Text \n{}.".format(input, TEXT)
 ```
-@LIA.eval(`["SeqSearch.py", "main.py"]`, `python -m compileall .`, `python main.pyc`)
+@LIA.eval(`["bruteForceSearch.py", "main.py"]`, `python -m compileall .`, `python main.pyc`)
 
 <details class="panel">
 <summary class="button">**Schritt 1:**</summary>
@@ -546,7 +559,7 @@ if __name__ == "__main__":
 
 ### Knuth-Morris-Pratt
 
-Auf dieser Seite behandeln wir den Algorithmus von Knuth-Morris-Pratt. Die Idee ist, dass bereits gelesene Informationen bei einem Mismatch genutzt werden.
+Auf dieser Seite behandeln wir den Algorithmus von [Knuth-Morris-Pratt](https://de.wikipedia.org/wiki/Knuth-Morris-Pratt-Algorithmus). Die Idee ist, dass bereits gelesene Informationen bei einem Mismatch genutzt werden.
 
 #### Beispiel
 
@@ -573,27 +586,34 @@ Falls Sie Hilfe beim Einstieg in Python brauchen, finden Sie diese z.B. [hier](h
 <!-- data-readOnly="false" -->
 ``` python
 # die zu durchsuchende liste
-LIST = [4,8,-5,2,6,92,7,3,15,32,96,47,1,55,0,17]
+TEXT = "abababcbababcababcab"
 
-def seqSearch(input):
+def prefixAnalysis(pattern):
   # your code goes here ...
 
-  return index
+  return None
+
+def knpSearch(patter):
+  # your code goes here ...
+  textAsList = list(TEXT)
+  patternAsList = list(pattern)
+
+  return None
 ```
 <!-- data-readOnly="True"  style="display:block"-->
 ``` python -main.py
-from SeqSearch import seqSearch, LIST
+from knpSearch import knpSearch, TEXT
 
 if __name__ == "__main__":
-    print "Bitte geben Sie eine beliebige zu suchende Zahl ein:"
+    print "Bitte geben Sie eine beliebige zu suchende Zeichenfolge ein:"
     input = input()
-    index = seqSearch(input)
+    index = knpSearch(input)
     if index != -1:
-      print "Die Zahl {} befindet sich in der Liste \n{} \nan dem Index {}.".format(input, LIST, index)
+      print "Die Zeichenfolge {} befindet sich in dem Text \n{} \nan dem Index {}.".format(input, TEXT, index)
     else:
-      print "Die Zahl {} befindet sich nicht in der Liste \n{}.".format(input, LIST)
+      print "Die Zeichenfolge {} befindet sich nicht in dem Text \n{}.".format(input, TEXT)
 ```
-@LIA.eval(`["SeqSearch.py", "main.py"]`, `python -m compileall .`, `python main.pyc`)
+@LIA.eval(`["knpSearch.py", "main.py"]`, `python -m compileall .`, `python main.pyc`)
 
 <details class="panel">
 <summary class="button">**Schritt 1:**</summary>
