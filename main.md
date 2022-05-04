@@ -471,9 +471,12 @@ Nun behandeln wir das Suchen in Texten. Das Problem ist das Suchen eines Teilwor
 >
 > - Das gesamte Alphabet (incl. $\epsilon$ (leerer string))
 
+In dieser Selbstlerneinheit werden wir uns nur den naiven Algorithmus zur Textsuche anschauen. Falls interesse für weitere Algorithmen zur Suche in Texten besteht, können Sie sich den [Knuth-Morris-Pratt-Algorithmus](https://de.wikiversity.org/wiki/Kurs:Algorithmen_und_Datenstrukturen/Vorlesung/Textsuche_Knuth_Morris_Path) auf Wikiversity anschauen.
+
+
 ### Naiver Algorithmus zur Textsuche
 
-Nun betrachten wir einen naiven Algorithmus zur Textsuche. Und zwar die direkte Lösung, **brute force**.
+In diesem Abschnitt betrachten wir den naiven Algorithmus zur Textsuche. Und zwar die direkte Lösung, **brute force**.
 
 #### Beispiel
 
@@ -537,7 +540,9 @@ if __name__ == "__main__":
 <summary class="button">**Schritt 1:**</summary>
 
 <p class="panel-content">
+Damit der Text nach einem bestimmten Teilwort (**Pattern**) durchsucht werden kann, muss der Text und das gesuchte Teilwort als **Liste** zur Verfügung stehen. Ein Listenelement ist dabei jeweils ein einzelnes Zeichen.
 
+Speichern Sie also zunächst den gegebenen Textkorpus und das übergebene Pattern so ab, sodass die Bedingung erfüllt ist.
 </p>
 </details>
 
@@ -545,7 +550,9 @@ if __name__ == "__main__":
 <summary class="button">**Schritt 2:**</summary>
 
 <p class="panel-content">
+Schreiben Sie als nächstes einen Codeabschnitt, in dem der Textkorpus von vorne nach hinten durchlaufen wird. Zusätzlich soll dabei bei **jedem** Element des Textes kontrolliert werden, ob das erste Zeichen des gesuchten Patterns mit dem aktuellen Element übereinstimmt.
 
+_**Hinweis:** Damit der naive Alogorithmus funktioniert muss nicht der gesamte Textkorpus durchlaufen werden._
 </p>
 </details>
 
@@ -553,88 +560,22 @@ if __name__ == "__main__":
 <summary class="button">**Schritt 3:**</summary>
 
 <p class="panel-content">
+Erweitern Sie Ihren Codeabschnitt nun wie folgt:
 
+- Tritt der Fall ein, dass die beiden zu vergleichenden Zeichen **übereinstimmen**, dann durchlaufen Sie das Pattern (und den Textkorpus) weiter und kontrollieren Sie, ob die folgenden Zeichen ebenfalls übereinstimmen.
+- Tritt der Fall ein, dass die beiden zu vergleichenden Zeichen **nicht** übereinstimmt, dann brechen Sie den aktuellen Durchlauf des Patterns ab und starten Sie die Suche beim nächsten Element des Textes von vorne.
+
+_**Hinweis:** Verwenden Sie zwei Schleifen. Eine zum durchlaufen des Textes und eine zum durchlaufen des Patterns._
+
+_**Hinweis:** Achten Sie im zweiten Fall darauf, dass die Suche beim richtigen Zeichen des Textes fortgesetzt wird. Am Ende sollte jedes Zeichen des Textes einmal mit dem ersten Zeichen des Patterns verglichen worden sein (Falls das Pattern nicht vorher schon gefunden wurde)._
 </p>
 </details>
-
-### Knuth-Morris-Pratt
-
-Auf dieser Seite behandeln wir den Algorithmus von [Knuth-Morris-Pratt](https://de.wikipedia.org/wiki/Knuth-Morris-Pratt-Algorithmus). Die Idee ist, dass bereits gelesene Informationen bei einem Mismatch genutzt werden.
-
-#### Beispiel
-
-#### Implementierung
-
-In diesem Kapitel werden Sie den Algorithmus selber schrittweise in Python implementieren. Der Code-Rahmen und Möglichkeiten Ihren Code zu testen sind jeweils schon gegeben, Sie müssen nur an den mit *"your code goes here ..."* gekennzeichneten Stellen ihren Code einfügen. Bei Bedarf ist es auch möglich eigene Testfälle zu schreiben.
-
-Falls Sie Hilfe beim Einstieg in Python brauchen, finden Sie diese z.B. [hier](https://learnxinyminutes.com/docs/de-de/python-de/), falls es ganz schnell gehen muss oder [hier](https://www.python-lernen.de/), falls es etwas ausführlicher sein soll.
-
-<!--  style="background-color:#A6D492;" -->
-> ## Ziel dieses Kapitels
->
-> Nach diesem Kapitel sollten Sie in der Lage sein, den Knuth-Morris-Pratt Algorithmus selbstständig zu implementieren.
-
-##### Code
-
-<!-- style="background-color:lightblue;" -->
-> **Bedienungsanleitung des Code-Blocks:**
->
-> - Zum ausführen des Codes müssen Sie den Button links unterhalb des Code-Blocks anklicken. Dadurch wird der gesamte Inhalt kompiliert und ausgeführt. Falls Sie anschließend Änderungen an Ihrem Code vornehmen, müssen Sie darauf achten den Button erneut anzuklicken, damit diese gespeichert und neu kompiliert werden.
->
->- Mithilfe der Pfeiltasten rechts unterhalb des Blocks können Sie zwischen Ihren Speicherständen vor und zurück wechseln, um ggf. Änderungen rückgängig zu machen oder ältere Zustände wiederherzustellen.
-
-<!-- data-readOnly="false" -->
-``` python
-# die zu durchsuchende liste
-TEXT = "abababcbababcababcab"
-
-def prefixAnalysis(pattern):
-  # your code goes here ...
-
-  return None
-
-def knpSearch(patter):
-  # your code goes here ...
-  textAsList = list(TEXT)
-  patternAsList = list(pattern)
-
-  return None
-```
-<!-- data-readOnly="True"  style="display:block"-->
-``` python -main.py
-from knpSearch import knpSearch, TEXT
-
-if __name__ == "__main__":
-    print "Bitte geben Sie eine beliebige zu suchende Zeichenfolge ein:"
-    input = input()
-    index = knpSearch(input)
-    if index != -1:
-      print "Die Zeichenfolge {} befindet sich in dem Text \n{} \nan dem Index {}.".format(input, TEXT, index)
-    else:
-      print "Die Zeichenfolge {} befindet sich nicht in dem Text \n{}.".format(input, TEXT)
-```
-@LIA.eval(`["knpSearch.py", "main.py"]`, `python -m compileall .`, `python main.pyc`)
-
 <details class="panel">
-<summary class="button">**Schritt 1:**</summary>
+<summary class="button">**Schritt 4:**</summary>
 
 <p class="panel-content">
+Jetzt soll noch der Fall hinzugefügt werden, dass das Pattern **vollständig** gefunden wurde. Tritt dies ein, soll der Index zurückgegeben werden an dem sich das erste Zeichen des Patterns im Textkorpus befindet.
 
-</p>
-</details>
-
-<details class="panel">
-<summary class="button">**Schritt 2:**</summary>
-
-<p class="panel-content">
-
-</p>
-</details>
-
-<details class="panel">
-<summary class="button">**Schritt 3:**</summary>
-
-<p class="panel-content">
-
+_**Hinweis:** Das Pattern wurde vollständig im Textkorpus gefunden, wenn das letzte Zeichen des Pattern erfolgreich mit dem "aktuellen" Zeichen des Textes verglichen wurde._
 </p>
 </details>
