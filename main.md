@@ -13,11 +13,11 @@ version:  0.0.1
 
 date:     12/04/2022
 
-logo:     https://cdn.jsdelivr.net/gh/TorroRosso46/Suchprobleme/custom.css
+logo:     
 
 icon:     docs/twillo_logo.svg
 
-link:     
+link:     https://cdn.jsdelivr.net/gh/TorroRosso46/Suchprobleme/custom.css
           ./custom.css
 
 import:   https://github.com/LiaTemplates/Pyodide/blob/0.1.4/README.md
