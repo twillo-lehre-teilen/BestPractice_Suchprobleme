@@ -13,11 +13,12 @@ version:  0.0.1
 
 date:     12/04/2022
 
-logo:     
+logo:     https://cdn.jsdelivr.net/gh/TorroRosso46/Suchprobleme/custom.css
 
 icon:     docs/twillo_logo.svg
 
-link:     https://cdn.jsdelivr.net/gh/TorroRosso46/Suchprobleme/custom.css
+link:     
+          ./custom.css
 
 import:   https://github.com/LiaTemplates/Pyodide/blob/0.1.4/README.md
           https://github.com/LiaScript/CodeRunner/blob/master/README.md
@@ -118,6 +119,137 @@ Leseoperationen:
 Dieses Kapitel handelt von der [sequentiellen Suche](https://de.wikipedia.org/wiki/Lineare_Suche). Die Idee dieses Suchalgorithmus ist, dass zuerst das erste Elemente der Liste mit dem gesuchten Elemente verglichen wird, wenn sie übereinstimmen wird der aktuelle Index zurückgegeben. Wenn nicht wird der Schritt mit dem nächsten Element wiederholt. Sollte das gesuchte Element bis zum Ende der Folge nicht gefunden werden, war die Suche erfolglos und -1 wird zurückgegeben.
 
 #### Beispiel
+
+Schauen wir uns den Algorithmus einmal Schritt für Schritt an folgendem Beispiel an:
+
+Dies ist eine Folge von aufsteigend sortierten numerischen Werten. Wir möchten nun herausfinden, ob sich der numerische Wert **5** in dieser Folge befindet.
+
+<lia-keep>
+  <table style="border-style:hidden">
+    <tr>
+      <th>2</th>
+      <th>3</th>
+      <th>5</th>
+      <th>8</th>
+      <th>9</th>
+      <th>14</th>
+      <th>17</th>
+      <th>21</th>
+      <th>22</th>
+    </tr>
+  </table>
+</lia-keep>
+
+Um das herauszufinden vergleichen wir **jedes** Element mit dem gesuchtem Wert.
+Dabei starten wir mit dem Element ganz links und gehen dann die Folge nach und nach durch, bis wir am Ende (rechts) angekommen sind.
+Finden wir beim durchlaufen der Folge das gesuchte Element, dann kann die Suche abgebrochen und der **aktuelle** Index zurückgegeben werden.
+Beachten Sie hierbei, dass der Index bei $0$ beginnt und nicht bei $1$.
+Kommen wir allerdings am Ende der Folge an **ohne** das Element gefunden zu haben, dann wissen wir, dass sich der gesuchte Wert nicht in der Folge befindet.
+Tritt dieser Fall ein, wird der Index $-1$ zurückgegeben.
+
+*In diesem Beispiel ist jeweils das aktuell betrachtete Element Türkis markiert.*
+*Falls dieses Element das gesuchte Element ist wird dies mit Grün gekennzeichnet, andernfalls mit Rot.*
+
+Beginnen wir also mit dem ersten Element ganz links.
+Dieses Element hat den Wert $2$.
+Da $2 \neq 5$ gilt, ist dies nicht das Element das wir suchen.
+Schauen wir uns also das nächste Element der Folge an.
+
+<lia-keep>
+  <table style="border-style:hidden;border-radius: 10px;">
+    <tr>
+      <th style="background-color:#54B6B5;">2</th>
+      <th>3</th>
+      <th>5</th>
+      <th>8</th>
+      <th>9</th>
+      <th>14</th>
+      <th>17</th>
+      <th>21</th>
+      <th>22</th>
+    </tr>
+  </table>
+  <table style="border-style:hidden;border-radius: 10px;">
+    <tr>
+      <th style="background-color:#F25B68;">2</th>
+      <th>3</th>
+      <th>5</th>
+      <th>8</th>
+      <th>9</th>
+      <th>14</th>
+      <th>17</th>
+      <th>21</th>
+      <th>22</th>
+    </tr>
+  </table>
+</lia-keep>
+
+Das nächste Element hat den Wert $3$.
+Der Wert $3$ ist allerdings leider auch nicht der gesuchte Wert.
+Somit können wir direkt weiter zum nächsten Element gehen.
+
+<lia-keep>
+  <table style="border-style:hidden">
+    <tr>
+      <th>2</th>
+      <th style="background-color:#54B6B5;">3</th>
+      <th>5</th>
+      <th>8</th>
+      <th>9</th>
+      <th>14</th>
+      <th>17</th>
+      <th>21</th>
+      <th>22</th>
+    </tr>
+  </table>
+  <table style="border-style:hidden">
+    <tr>
+      <th>2</th>
+      <th style="background-color:#F25B68;">3</th>
+      <th>5</th>
+      <th>8</th>
+      <th>9</th>
+      <th>14</th>
+      <th>17</th>
+      <th>21</th>
+      <th>22</th>
+    </tr>
+  </table>
+</lia-keep>
+
+Jetzt sind wir beim dritten Element angekommen. Dieses hat einen Wert von $5$ und da $5 = 5$ gilt, ist dies unser gesuchtes Element.
+
+<lia-keep>
+  <table style="border-style:hidden">
+    <tr>
+      <th>2</th>
+      <th>3</th>
+      <th style="background-color:#54B6B5;">5</th>
+      <th>8</th>
+      <th>9</th>
+      <th>14</th>
+      <th>17</th>
+      <th>21</th>
+      <th>22</th>
+    </tr>
+  </table>
+  <table style="border-style:hidden">
+    <tr>
+      <th>2</th>
+      <th>3</th>
+      <th style="background-color:#A6D492;">5</th>
+      <th>8</th>
+      <th>9</th>
+      <th>14</th>
+      <th>17</th>
+      <th>21</th>
+      <th>22</th>
+    </tr>
+  </table>
+</lia-keep>
+
+Der Sonderfall, dass der gesuchte Wert öfters vorkommt ist hier nicht relevant, da wir nur wissen möchten, ob sich Wert in der Folge befindet und nicht wie oft.
+Somit kann die Suche jetzt abgebrochen und als Index $2$ zurückgegeben werden.
 
 #### Implementierung
 
