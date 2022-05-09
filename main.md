@@ -341,7 +341,28 @@ Dieses Kapitel behandelt die [binäre Suche](https://de.wikipedia.org/wiki/Bin%C
 
 #### Beispiel
 
-jojojo...
+Schauen wir uns den Algorithmus einmal Schritt für Schritt an folgendem Beispiel an:
+
+Dies ist eine Folge von aufsteigend sortierten numerischen Werten. Wir möchten nun herausfinden, ob sich der numerische Wert 8 in dieser Folge befindet.
+
+<lia-keep>
+  <table style="border-style:hidden">
+    <tr>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>4</th>
+      <th>5</th>
+      <th>8</th>
+      <th>9</th>
+      <th>12</th>
+      <th>13</th>
+      <th>15</th>
+    </tr>
+  </table>
+</lia-keep>
+
+*In diesem Beispiel ist jeweils das aktuell betrachtete Element Türkis markiert. Falls dieses Element das gesuchte Element ist wird dies mit Grün gekennzeichnet, andernfalls mit Rot.*
 
 <lia-keep>
   <table style="border-style:hidden">
@@ -377,8 +398,8 @@ jojojo...
       <th>0</th>
       <th>1</th>
       <th>2</th>
-      <th style="linear-gradient(blue,red);">4</th>
-      <th style="linear-gradient(to right,blue,red);">5</th>
+      <th style="background-color:linear-gradient(blue,red);">4</th>
+      <th style="background-color:linear-gradient(to right,blue,red);">5</th>
       <th class="lowmid">8</th>
       <th style="background-color:#F25B68;">9</th>
       <th>12</th>
