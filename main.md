@@ -339,8 +339,54 @@ Jetzt soll das Programm so erweitert werden, dass bei dem Fall, dass das zu such
 
 Dieses Kapitel behandelt die [binäre Suche](https://de.wikipedia.org/wiki/Bin%C3%A4re_Suche). Wir stellen uns die Frage, wie die Suche effizienter werden könnte. Das Prinzip der binären Suche ist zuerst den mittleren Eintrag zu wählen und zu prüfen ob sich der gesuchte Wert in der linken oder rechten Hälfte der Liste befindet. Anschließend fährt man rekursiv mit der Hälfte fort, in der sich der Eintrag befindet. **Voraussetzung** für das binäre Suchverfahren ist, dass die Folge sortiert ist. Das Suchverfahren entspricht dem Entwurfsmuster von *Divide-and-Conquer*.
 
-
 #### Beispiel
+
+jojojo...
+
+<lia-keep>
+  <table style="border-style:hidden">
+    <tr>
+      <th style="background-color:#54B6B5;">0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>4</th>
+      <th style="background-color:#F38C3E;">5</th>
+      <th>8</th>
+      <th>9</th>
+      <th>12</th>
+      <th>13</th>
+      <th style="background-color:#F25B68;">15</th>
+    </tr>
+  </table>
+  <table style="border-style:hidden">
+    <tr>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>4</th>
+      <th>5</th>
+      <th style="background-color:#54B6B5;">8</th>
+      <th>9</th>
+      <th style="background-color:#F38C3E;">12</th>
+      <th>13</th>
+      <th style="background-color:#F25B68;">15</th>
+    </tr>
+  </table>
+  <table style="border-style:hidden">
+    <tr>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>4</th>
+      <th>5</th>
+      <th class="lowmid">8</th>
+      <th style="background-color:#F25B68;">9</th>
+      <th>12</th>
+      <th>13</th>
+      <th>15</th>
+    </tr>
+  </table>
+</lia-keep>
 
 #### Implementierung
 
