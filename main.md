@@ -377,8 +377,8 @@ jojojo...
       <th>0</th>
       <th>1</th>
       <th>2</th>
-      <th>4</th>
-      <th>5</th>
+      <th style="linear-gradient(blue,red);">4</th>
+      <th style="linear-gradient(to right,blue,red);">5</th>
       <th class="lowmid">8</th>
       <th style="background-color:#F25B68;">9</th>
       <th>12</th>
