@@ -73,5 +73,5 @@ table, th, td{
     margin-bottom: 10px;
 }
 .lowmid {
-    background-color: linear-gradient(#54B6B5,#F38C3E);
+    background-color: linear-gradient(to right,blue,red);
 }
