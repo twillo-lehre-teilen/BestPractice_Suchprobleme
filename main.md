@@ -341,9 +341,9 @@ Dieses Kapitel behandelt die [binäre Suche](https://de.wikipedia.org/wiki/Bin%C
 
 #### Beispiel
 
-Schauen wir uns den Algorithmus einmal Schritt für Schritt an folgendem Beispiel an:
+Schauen wir uns den binäre Suche einmal Schritt für Schritt an folgendem Beispiel an:
 
-Dies ist eine Folge von aufsteigend sortierten numerischen Werten. Wir möchten nun herausfinden, ob sich der numerische Wert 8 in dieser Folge befindet.
+Dies ist eine Folge von aufsteigend sortierten numerischen Werten. Wir möchten nun herausfinden, ob sich der numerische Wert $8$ in dieser Folge befindet.
 
 <lia-keep>
   <table style="border-style:hidden">
@@ -362,7 +362,15 @@ Dies ist eine Folge von aufsteigend sortierten numerischen Werten. Wir möchten 
   </table>
 </lia-keep>
 
-*In diesem Beispiel ist jeweils das aktuell betrachtete Element Türkis markiert. Falls dieses Element das gesuchte Element ist wird dies mit Grün gekennzeichnet, andernfalls mit Rot.*
+Um das herauszufinden vergleichen wir dieses mal **nicht** einfach jedes Element mit dem gesuchten Wert, sondern wir **halbieren** den Suchraum nach und nach so, dass möglichst wenige Vergleiche gemacht werden müssen, um eine Antwort zu erhalten. Dafür wählen wir jeweils den **mittleren** Eintrag im Suchraum aus und prüfen, ob dieser größer oder kleiner ist als der gesuchte Wert. Je nachdem, wie der Vergleich ausfällt, wird in der entsprechenden Hälfte des Suchraums weiter gesucht.
+
+*In diesem Beispiel ist jeweils das aktuell betrachtete Element bzw. die Mitte des Suchraums mit Orange gekennzeichnet.*
+*Die untere und obere Grenze des Suchraums ist zusätzlich mit Türkis bzw. Rot markiert.*
+
+Zu Beginn beinhaltet der Suchraum noch die gesamte Folge.
+Somit ist das erste Element, das wir betrachten, das mittlere Element der gesamten Folge. In diesem Fall ist dass das Element mit dem numerischen Wert $5$.
+Da $5 < 8$ gilt, ist dies nicht das Element das wir suchen.
+Durch den Vergleich können wir allerdings zusätzlich noch ausschließen, dass das gesuchte Element vor bzw. links von der $5$ steht. Wir brauchen unsere Suche also nur noch im rechten Teil der Folge fortsetzen.
 
 <lia-keep>
   <table style="border-style:hidden">
@@ -371,7 +379,7 @@ Dies ist eine Folge von aufsteigend sortierten numerischen Werten. Wir möchten 
       <th>1</th>
       <th>2</th>
       <th>4</th>
-      <th style="background-color:#F38C3E;">5</th>
+      <th style="color:#F38C3E;">5</th>
       <th>8</th>
       <th>9</th>
       <th>12</th>
@@ -379,6 +387,14 @@ Dies ist eine Folge von aufsteigend sortierten numerischen Werten. Wir möchten 
       <th style="background-color:#F25B68;">15</th>
     </tr>
   </table>
+</lia-keep>
+
+Der Suchraum beinhaltet nun nur noch den Teil der Folge, welcher sich rechts vom vorherigen Element, dem Element mit dem Wert $5$, befindet.
+Die Mitte dieses neuen, verkleinerten Suchraums ist das Element mit dem Wert $12$.
+Leider ist das aber auch noch nicht das gesuchte Element.
+Diesmal gilt $12 > 8$, wodurch der Suchraum erneut verkleinert werden kann, und zwar auf den Bereich links von der aktuellen Mitte.
+
+<lia-keep>
   <table style="border-style:hidden">
     <tr>
       <th>0</th>
@@ -388,19 +404,27 @@ Dies ist eine Folge von aufsteigend sortierten numerischen Werten. Wir möchten 
       <th>5</th>
       <th style="background-color:#54B6B5;">8</th>
       <th>9</th>
-      <th style="background-color:#F38C3E;">12</th>
+      <th style="color:#F38C3E;">12</th>
       <th>13</th>
       <th style="background-color:#F25B68;">15</th>
     </tr>
   </table>
+</lia-keep>
+
+Nun betrachten wir einen Suchraum der nur noch aus zwei Elementen besteht.
+Das nach Definition mittlere Element ist in diesem Sonderfall das linke Element, d.h., das Element mit dem Wert $8$.
+$8$ ist auch der Wert den wir Suchen.
+Unsere Suche ist hiermit erfolgreich abgeschlossen.
+
+<lia-keep>
   <table style="border-style:hidden">
     <tr>
       <th>0</th>
       <th>1</th>
       <th>2</th>
-      <th style="background-color:linear-gradient(blue,red);">4</th>
-      <th style="background-color:linear-gradient(to right,blue,red);">5</th>
-      <th class="lowmid">8</th>
+      <th>4</th>
+      <th>5</th>
+      <th style="background-color:#54B6B5;color:#F38C3E;">8</th>
       <th style="background-color:#F25B68;">9</th>
       <th>12</th>
       <th>13</th>
@@ -408,6 +432,8 @@ Dies ist eine Folge von aufsteigend sortierten numerischen Werten. Wir möchten 
     </tr>
   </table>
 </lia-keep>
+
+In diesem Beispiel benötigte die binäre Suche insgesamt drei Vergleiche um das Element zu finden. Zum Vergleich, die sequentielle Suche hätte bei dem selben Beispiel sechs Vergleiche benötigt. Es lässt sich sagen, dass in der Regel die binäre Suche effizienter als die sequentielle Suche ist. Es gibt allerdings Ausnahmen in denen dies nicht der Fall ist.
 
 #### Implementierung
 
