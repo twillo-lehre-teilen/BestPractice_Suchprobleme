@@ -9,16 +9,15 @@ language: de
 
 mode:     Textbook
 
-version:  0.0.1
+version:  1.0.0
 
 date:     12/04/2022
 
-logo:     
+logo:     docs/thumbnail.JPG
 
 icon:     docs/twillo_logo.svg
 
 link:     https://cdn.jsdelivr.net/gh/TorroRosso46/Suchprobleme/custom.css
-          ./custom.css
 
 import:   https://github.com/LiaTemplates/Pyodide/blob/0.1.4/README.md
           https://github.com/LiaScript/CodeRunner/blob/master/README.md
@@ -278,13 +277,7 @@ LIST = [4,8,-5,2,6,92,7,3,15,32,96,47,1,55,0,17]
 
 def seqSearch(input):
   # your code goes here ...
-  index = -1
-  for i in range(0,len(list)):
-    if input == LIST[i]:
-      index = i
-      break
-
-  return index
+  return -1
 ```
 <!-- data-readOnly="True"  style="display:block"-->
 ``` python -main.py
@@ -462,18 +455,11 @@ LIST = [-5,0,1,2,3,4,6,7,8,15,17,32,47,55,92,96]
 
 def binarySearch(input):
   # your code goes here ...
-  return binarySearchRecursiv(input, 0, len(LIST)-1)
+  return -1
 
 def binarySearchRecursiv(input, low, up):
   # your code goes here ...
-  m = (low+up)/2
-  if LIST[m] == input:
-    return m
-  if low == up:
-    return -1
-  if LIST[m] > input:
-    return binarySearchRecursiv(input, low, m-1)
-  return binarySearchRecursiv(input,m+1,up)
+  return -1
 ```
 <!-- data-readOnly="True"  style="display:block"-->
 ``` python -main.py
@@ -692,22 +678,11 @@ LIST = [-5,0,1,2,3,4,6,7,8,15,17,32,47,55,92,96]
 
 def fibonacciSearch(input):
   # your code goes here ...
-  return fibonacciSearchRecursiv(input, 0, len(LIST)-1)
+  return -1
 
 def fibonacciSearchRecursiv(input, low, up):
   # your code goes here ...
-  m = 0
-  while (fib(m) < up-low):
-    m += 1
-  if m != 0: m -= 1
-
-  if LIST[low+fib(m)] == input:
-    return low+fib(m)
-  if low == up:
-    return -1
-  if input < LIST[low+fib(m)]:
-    return fibonacciSearchRecursiv(input, low, low+fib(m)-1)
-  return fibonacciSearchRecursiv(input,low+fib(m)+1,up)
+  return -1
 ```
 <!-- data-readOnly="True"  style="display:block"-->
 ``` python -main.py
@@ -1295,17 +1270,6 @@ TEXT = "abababcbababcababcab"
 
 def bruteForceSearch(pattern):
   # your code goes here ...
-  textAsList = list(TEXT)
-  patternAsList = list(pattern)
-
-  for i in range(len(textAsList) - len(patternAsList) + 1):
-    for j in range(len(patternAsList)):
-      if patternAsList[j] != textAsList[i+j]:
-        break
-      if j == (len(patternAsList)-1):
-        return i
-      j += 1
-    i += 1
 
   return -1
 ```
