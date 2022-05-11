@@ -41,8 +41,7 @@ Pyodide:
 > - Dem [Kapitel "Suchen"](https://de.wikiversity.org/wiki/Kurs:Algorithmen_und_Datenstrukturen/Vorlesung/Suchen) aus dem [Kurs "Algorithmen und Datenstrukturen"](https://de.wikiversity.org/wiki/Kurs:Algorithmen_und_Datenstrukturen), von Wikiversity unter der Beteiligung folgender [Autor:innen](https://de.wikiversity.org/w/index.php?title=Kurs:Algorithmen_und_Datenstrukturen/Vorlesung/Sortieren_Grundlagen&action=history), unter der [Lizenz CC-BY-SA (3.0)](https://creativecommons.org/licenses/by-sa/3.0/legalcode).
 >
 > - Dem [Artikel "Difference between List and Array in Python"](https://www.geeksforgeeks.org/difference-between-list-and-array-in-python/), veröffentlicht auf [geeksforgeeks](https://www.geeksforgeeks.org/) von [Yash Chuahan](https://auth.geeksforgeeks.org/user/yashchuahan/articles), unter der [Lizenz CC-BY-SA (4.0)](https://creativecommons.org/licenses/by-sa/4.0/legalcode).
->
-> - Dem [Artikel "Knuth-Morris-Pratt-Algorithmus"](https://de.wikipedia.org/wiki/Knuth-Morris-Pratt-Algorithmus), veröffentlicht auf [Wikipedia](https://de.wikipedia.org/wiki/Wikipedia:Hauptseite) von den [Autor:innen](https://xtools.wmflabs.org/articleinfo-authorship/de.wikipedia.org/Knuth-Morris-Pratt-Algorithmus?uselang=de) unter der [Lizenz CC-BY-SA (3.0)](https://creativecommons.org/licenses/by-sa/3.0/legalcode).
+
 
 <!-- style="background-color:transparent;" -->
 > Diese Selbstlerneinheit konzentriert sich auf die Funktionsweise verschiedener Suchalgorithmen und enthält interaktive Aufgaben um das Gelernte zu überprüfen und zu verinnerlichen.
