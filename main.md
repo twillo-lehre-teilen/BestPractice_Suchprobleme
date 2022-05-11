@@ -533,9 +533,6 @@ Die im vorherigen Kapitel behandelte binäre Suche hat einige Nachteile. Die bin
 
 Anstatt wie bei der binären Suche das Array in gleich große Teile zu teilen, wird das Array bei der Fibonacci-Suche in Teilen entsprechend der Fibonacci-Zahlen geteilt. Es wird zunächst das Element an Indexposition ***m*** betrachtet, wobei ***m*** die größte Fibonaccizahl ist, die kleiner als die Arraylänge ist. Anschließend fährt man wie bei der binären Suche rekursiv mit dem entsprechenden Teilarray fort.
 
-
-
-
 > ## Fibonacci Zahlen
 >
 > Zur Erinnerung, [die Folge der Fibonacci Zahlen](https://de.wikipedia.org/wiki/Fibonacci-Folge)  $F_{n}$ für $n \ge 0$ ist definiert durch:
@@ -547,7 +544,7 @@ Anstatt wie bei der binären Suche das Array in gleich große Teile zu teilen, w
 >
 > **Die Fibonacci-Reihe:**
 >
-> <!-- data-title="Fibonacci-Reihe" data-type="None" data-transpose="false" -->
+> <!-- data-title="Fibonacci-Reihe" data-type="None" data-transpose="false" style="border-radius:0px;background-color:white;" -->
 > | **i** | **$F_i$** |
 > |:-----:|:-----:|
 > |   0   |   0   |
@@ -567,6 +564,93 @@ Anstatt wie bei der binären Suche das Array in gleich große Teile zu teilen, w
 > |   14  |  377  |
 
 #### Beispiel
+
+Schauen wir uns die fibonacci Suche einmal Schritt für Schritt an folgendem Beispiel an:
+
+Dies ist eine Folge von aufsteigend sortierten numerischen Werten. Wir möchten nun herausfinden, ob sich der numerische Wert $133$ in dieser Folge befindet.
+
+<lia-keep>
+  <table style="border-style:hidden">
+    <tr>
+      <th>9</th>
+      <th>19</th>
+      <th>21</th>
+      <th>34</th>
+      <th>87</th>
+      <th>102</th>
+      <th>158</th>
+      <th>159</th>
+      <th>199</th>
+      <th>205</th>
+    </tr>
+  </table>
+</lia-keep>
+
+Bei der binären Suche haben wir stets das mittlere Element des aktuellen Suchraums betrachtet, um diesen anschließend mithilfe dieses Elements zu halbieren. Bei der fibonacci Suche wählen wir auf eine andere Weise ein Element aus, damit der Suchraum noch effektiver geteilt werden kann. Und zwar wird jeweils das Element an der Indexposition betrachtet, welche die größt mögliche Fibonaccizahl im aktuellen Suchraum und zusätzlich nicht das letzte Element der Folge ist. **Als Beispiel:** Wenn der Suchraum eine Größe von $8$ hat, also Indexpositionen von $0$ bis $7$ besitzt, dann würde das Element an Indexposition $5$ zuerst betrachtet werden. Dies liegt daran, dass $F_5 = 5$ gilt und die nächst größere Fibonaccizahl $F_6 = 8$ schon außerhalb des Suchraums liegt.
+
+*In diesem Beispiel ist jeweils das aktuell betrachtete Element bzw. die größte Fibonaccizahl (Indexposition) innerhalb des Suchraums mit Orange gekennzeichnet. Die untere und obere Grenze des Suchraums ist zusätzlich mit Türkis bzw. Rot markiert.*
+
+Zu Beginn beinhaltet der Suchraum noch die gesamte Folge.
+Die Folge hat eine größe von $10$, somit ist das erste Element, dass wir betrachten, das Element an Indexposition $8$. Denn $F_6 = 8$, $F_7 = 13$ und $8 < 9 < 13$.
+Das Element an Indexposition $8$ hat einen Wert von $199$.
+$199$ ist nicht die gesuchte Zahl $133$, ist aber größer als diese, wodurch wir den Suchraum auf den vorderen bzw. linken Teil der Folge einschränken können.
+
+<lia-keep>
+  <table style="border-style:hidden">
+    <tr>
+      <th style="background-color:#54B6B5;">9</th>
+      <th>19</th>
+      <th>21</th>
+      <th>34</th>
+      <th>87</th>
+      <th>102</th>
+      <th>158</th>
+      <th>159</th>
+      <th style="color:#F38C3E;">199</th>
+      <th style="background-color:#F25B68;">205</th>
+    </tr>
+  </table>
+</lia-keep>
+
+Jetzt hat der Suchraum nur noch eine größe von $8$. In diesem Bereich ist die größt mögliche Fibonaccizahl $F_5 = 5$. Die nächst größere Fibonaccizahl $F_6 = 8$ ist nämlich schon außerhalb des aktuellen Suchraums. *Zur Erinnerung: Ein Suchraum der größe $8$ hat Indexpositionen von $0-7$.*
+Das betrachtete Element ist also das mit dem numerischen Wert $102$. Der Wert $102$ ist kleiner als unsere gesuchte Zahl. Wir brauchen deshalb nur noch im rechten Teil des aktuellen Suchraums weiter suchen.
+
+<lia-keep>
+  <table style="border-style:hidden">
+    <tr>
+      <th style="background-color:#54B6B5;">9</th>
+      <th>19</th>
+      <th>21</th>
+      <th>34</th>
+      <th>87</th>
+      <th style="color:#F38C3E;">102</th>
+      <th>158</th>
+      <th style="background-color:#F25B68;">159</th>
+      <th>199</th>
+      <th>205</th>
+    </tr>
+  </table>
+</lia-keep>
+
+Der Suchraum besteht jetzt nur noch aus zwei Elementen. Die größte Fibonaccizahl in diesem Bereich ist $F_0 = 0$. $F_1 = 1$ liegt nämlich schon nicht mehr im zugelassenem Bereich ($1 \lneqq 1$). Wir bertrachten somit das Element an Indexposition $0$ im aktuellen Suchraum, welches einen Wert von $158$ hat. Es gilt $158 > 133$, d.h. das gesuchte Element müsste links von dem aktuell betrachteten Element liegen. Allerdings gibt es im aktuellen Suchraum kein Element mehr, dass links vom aktuell betrachteten Element liegt. Unsere Suche ist dadurch erfolglos und kann beendet werden. Der Wert $133$ befindet sich nicht in der Folge.
+
+<lia-keep>
+  <table style="border-style:hidden">
+    <tr>
+      <th>9</th>
+      <th>19</th>
+      <th>21</th>
+      <th>34</th>
+      <th>87</th>
+      <th>102</th>
+      <th style="background-color:#54B6B5;color:#F38C3E;">158</th>
+      <th style="background-color:#F25B68;">159</th>
+      <th>199</th>
+      <th>205</th>
+    </tr>
+  </table>
+</lia-keep>
+
 
 #### Implementierung
 
@@ -704,6 +788,485 @@ In dieser Selbstlerneinheit werden wir uns nur den naiven Algorithmus zur Textsu
 In diesem Abschnitt betrachten wir den naiven Algorithmus zur Textsuche. Und zwar die direkte Lösung, **brute force**.
 
 #### Beispiel
+
+Schauen wir uns die **brute force** Methode einmal Schritt für Schritt an folgendem Beispiel an:
+
+Dies sei ein Text, oder auch eine Folge von *character* (Zeichen), in dem wir das Wort **"abacab"** finden möchten.
+
+<lia-keep>
+  <table style="border-style:hidden;border-radius:0px;">
+    <tr>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>a</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>c</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>a</td>
+    </tr>
+  </table>
+</lia-keep>
+
+Dafür gehen wir Zeichen für Zeichen, von vorne nach hinten, den Text durch und vergleichen, ob sich das gesuchte Wort an der jeweiligen Position befindet. Genauer gesagt kontrollieren wir, ob das gesuchte Wort an der jeweiligen Position **liegen könnte**, in dem wir das erste Zeichen des gesuchten Wortes mit dem Zeichen aus dem Text vergleichen. Stimmen sie überein, dann könnte das gesuchte Wort dort anfangen. Um das zu kontrollieren werden die jeweils nächsten Zeichen miteinander verglichen. Stimmen diese wieder überein wird mit den nächsten Zeichen fortgesetzt, und das so lange, bis das letzte Zeichen des gesuchten Wortes verglichen wurde oder bis die zu vergleichenden Zeichen nicht mehr miteinander übereinstimmen. Tritt ersteres ein, dann wurde das Wort erfolgreich gefunden. Tritt aber letzteres ein, dann kann das gesuchte Wort an dieser Position im Text **nicht** mehr liegen. Die Suche würde dann an der nächsten Position im Text von vorne begonnen werden. Hierbei muss beachtet werden, dass keine Position als möglicher Anfang des gesuchten Wortes ausgelassen wird.
+
+*In diesem Beispiel ist jeweils das aktuell betrachtete Zeichen, welches mit dem Text verglichen wird, Orange gekennzeichnet. Der Bereich in dem das Wort jeweils vermutet wird ist mit Türkis markiert. Ist ein einzelner Vergleich erfolgreich, ist dies mit Grün gekennzeichnet, anderenfalls mit Rot.*
+
+Wir starten mit dem ersten Zeichen aus dem Text. Dieses ist das Zeichen **a**. Unser gesuchtes Wort ("abacab") fängt ebenfalls mit dem Zeichen **a** an. Der erste Vergleich ist also erfolgreich und wir können die beiden nächsten Zeichen miteinander vergleichen. Diese stimmen ebenfalls überein (**b = b**), weshalb wir mit den nächsten weitermachen können, welche wiederum übereinstimmen, usw. Beim letzten Zeichen des gesuchten Wortes schlägt unser Vergleich mit dem Zeichen aus dem Text allerdings fehl (**a $\neq$ b**). Das Wort liegt also nicht an dieser Position (Index 0).
+
+<lia-keep>
+  <table style="border-style:hidden;border-radius:0px;">
+    <tr style="border-radius:10px;">
+      <td style="background-color:#54B6B5;color:#F38C3E;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">b</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">c</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>c</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>a</td>
+    </tr>
+  </table>
+  <table style="border-style:hidden;border-radius:0px;">
+    <tr>
+      <td style="background-color:#A6D492;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;color:#F38C3E;border-radius:0px;">b</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">c</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>c</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>a</td>
+    </tr>
+  </table>
+  <table style="border-style:hidden;border-radius:0px;">
+    <tr>
+      <td style="background-color:#A6D492;border-radius:0px;">a</td>
+      <td style="background-color:#A6D492;border-radius:0px;">b</td>
+      <td style="background-color:#54B6B5;color:#F38C3E;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">c</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>c</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>a</td>
+    </tr>
+  </table>
+  <table style="border-style:hidden;border-radius:0px;">
+    <tr>
+      <td style="background-color:#A6D492;border-radius:0px;">a</td>
+      <td style="background-color:#A6D492;border-radius:0px;">b</td>
+      <td style="background-color:#A6D492;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;color:#F38C3E;border-radius:0px;">c</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>c</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>a</td>
+    </tr>
+  </table>
+  <table style="border-style:hidden;border-radius:0px;">
+    <tr>
+      <td style="background-color:#A6D492;border-radius:0px;">a</td>
+      <td style="background-color:#A6D492;border-radius:0px;">b</td>
+      <td style="background-color:#A6D492;border-radius:0px;">a</td>
+      <td style="background-color:#A6D492;border-radius:0px;">c</td>
+      <td style="background-color:#54B6B5;color:#F38C3E;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>c</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>a</td>
+    </tr>
+  </table>
+  <table style="border-style:hidden;border-radius:0px;">
+    <tr>
+      <td style="background-color:#A6D492;border-radius:0px;">a</td>
+      <td style="background-color:#A6D492;border-radius:0px;">b</td>
+      <td style="background-color:#A6D492;border-radius:0px;">a</td>
+      <td style="background-color:#A6D492;border-radius:0px;">c</td>
+      <td style="background-color:#A6D492;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;color:#F38C3E;border-radius:0px;">a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>c</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>a</td>
+    </tr>
+  </table>
+  <table style="border-style:hidden;border-radius:0px;">
+    <tr>
+      <td style="background-color:#A6D492;border-radius:0px;">a</td>
+      <td style="background-color:#A6D492;border-radius:0px;">b</td>
+      <td style="background-color:#A6D492;border-radius:0px;">a</td>
+      <td style="background-color:#A6D492;border-radius:0px;">c</td>
+      <td style="background-color:#A6D492;border-radius:0px;">a</td>
+      <td style="background-color:#F25B68;border-radius:0px;">a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>c</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>a</td>
+    </tr>
+  </table>
+</lia-keep>
+
+Die Suche geht nun beim nächsten Zeichen im Text von vorne los, d.h. mit dem Zeichen auf der Indexposition 1. Dieses Zeichen ist ein **b**. Wir benötigen aber ein **a** am Anfang des Wortes. Das gesuchte Wort kann hier also auch nicht liegen.
+
+<lia-keep>
+  <table style="border-style:hidden;border-radius:0px;">
+    <tr style="border-radius:10px;">
+      <td>a</td>
+      <td style="background-color:#54B6B5;color:#F38C3E;border-radius:0px;">b</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">c</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>c</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>a</td>
+    </tr>
+  </table>
+  <table style="border-style:hidden;border-radius:0px;">
+    <tr style="border-radius:10px;">
+      <td>a</td>
+      <td style="background-color:#F25B68;border-radius:0px;">b</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">c</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>c</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>a</td>
+    </tr>
+  </table>
+</lia-keep>
+
+Führen wir die Suche an der nächsten Position fort ist der erste Vergleich wieder erfolgreich. Leider schlägt der Vergleich mit dem zweiten Zeichen fehl. An dieser Stelle liegt das gesuchte Wort somit auch nicht.
+
+<lia-keep>
+  <table style="border-style:hidden;border-radius:0px;">
+    <tr style="border-radius:10px;">
+      <td>a</td>
+      <td>b</td>
+      <td style="background-color:#54B6B5;color:#F38C3E;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">c</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">b</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td>c</td>
+      <td>c</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>a</td>
+    </tr>
+  </table>
+  <table style="border-style:hidden;border-radius:0px;">
+    <tr style="border-radius:10px;">
+      <td>a</td>
+      <td>b</td>
+      <td style="background-color:#A6D492;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;color:#F38C3E;border-radius:0px;">c</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">b</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td>c</td>
+      <td>c</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>a</td>
+    </tr>
+  </table>
+  <table style="border-style:hidden;border-radius:0px;">
+    <tr style="border-radius:10px;">
+      <td>a</td>
+      <td>b</td>
+      <td style="background-color:#A6D492;border-radius:0px;">a</td>
+      <td style="background-color:#F25B68;border-radius:0px;">c</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">b</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td>c</td>
+      <td>c</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>a</td>
+    </tr>
+  </table>
+</lia-keep>
+
+---
+
+**. . .**
+
+---
+
+Führen wir dieses Prozedere fort, so bleiben wir zunächst noch einige male erfolglos. Und zwar so lange, bis wir an Indexposition 10 angekommen sind. Kontrollieren wir Zeichen für Zeichen, ob unser gesuchtes Wort dort liegt und anfängt, dann stellen wir fest, dass **alle** Vergleiche erfolgreich sind. Wir haben unser Wort gefunden. Es fängt an der Indexposition 10 an und hört an der Indexposition 15 auf.
+
+<lia-keep>
+<table style="border-style:hidden;border-radius:0px;">
+  <tr style="border-radius:10px;">
+    <td>a</td>
+    <td>b</td>
+    <td>a</td>
+    <td>c</td>
+    <td>a</td>
+    <td>a</td>
+    <td>b</td>
+    <td>a</td>
+    <td>c</td>
+    <td>c</td>
+    <td style="background-color:#54B6B5;color:#F38C3E;border-radius:0px;">a</td>
+    <td style="background-color:#54B6B5;border-radius:0px;">b</td>
+    <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+    <td style="background-color:#54B6B5;border-radius:0px;">c</td>
+    <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+    <td style="background-color:#54B6B5;border-radius:0px;">b</td>
+    <td>a</td>
+    <td>a</td>
+  </tr>
+</table>
+  <table style="border-style:hidden;border-radius:0px;">
+    <tr style="border-radius:10px;">
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>a</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>c</td>
+      <td style="background-color:#A6D492;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;color:#F38C3E;border-radius:0px;">b</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">c</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">b</td>
+      <td>a</td>
+      <td>a</td>
+    </tr>
+  </table>
+  <table style="border-style:hidden;border-radius:0px;">
+    <tr style="border-radius:10px;">
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>a</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>c</td>
+      <td style="background-color:#A6D492;border-radius:0px;">a</td>
+      <td style="background-color:#A6D492;border-radius:0px;">b</td>
+      <td style="background-color:#54B6B5;color:#F38C3E;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">c</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">b</td>
+      <td>a</td>
+      <td>a</td>
+    </tr>
+  </table>
+  <table style="border-style:hidden;border-radius:0px;">
+    <tr style="border-radius:10px;">
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>a</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>c</td>
+      <td style="background-color:#A6D492;border-radius:0px;">a</td>
+      <td style="background-color:#A6D492;border-radius:0px;">b</td>
+      <td style="background-color:#A6D492;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;color:#F38C3E;border-radius:0px;">c</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">b</td>
+      <td>a</td>
+      <td>a</td>
+    </tr>
+  </table>
+  <table style="border-style:hidden;border-radius:0px;">
+    <tr style="border-radius:10px;">
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>a</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>c</td>
+      <td style="background-color:#A6D492;border-radius:0px;">a</td>
+      <td style="background-color:#A6D492;border-radius:0px;">b</td>
+      <td style="background-color:#A6D492;border-radius:0px;">a</td>
+      <td style="background-color:#A6D492;border-radius:0px;">c</td>
+      <td style="background-color:#54B6B5;color:#F38C3E;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;border-radius:0px;">b</td>
+      <td>a</td>
+      <td>a</td>
+    </tr>
+  </table>
+  <table style="border-style:hidden;border-radius:0px;">
+    <tr style="border-radius:10px;">
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>a</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>c</td>
+      <td style="background-color:#A6D492;border-radius:0px;">a</td>
+      <td style="background-color:#A6D492;border-radius:0px;">b</td>
+      <td style="background-color:#A6D492;border-radius:0px;">a</td>
+      <td style="background-color:#A6D492;border-radius:0px;">c</td>
+      <td style="background-color:#A6D492;border-radius:0px;">a</td>
+      <td style="background-color:#54B6B5;color:#F38C3E;border-radius:0px;">b</td>
+      <td>a</td>
+      <td>a</td>
+    </tr>
+  </table>
+  <table style="border-style:hidden;border-radius:0px;">
+    <tr style="border-radius:10px;">
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>a</td>
+      <td>a</td>
+      <td>b</td>
+      <td>a</td>
+      <td>c</td>
+      <td>c</td>
+      <td style="background-color:#A6D492;border-radius:0px;">a</td>
+      <td style="background-color:#A6D492;border-radius:0px;">b</td>
+      <td style="background-color:#A6D492;border-radius:0px;">a</td>
+      <td style="background-color:#A6D492;border-radius:0px;">c</td>
+      <td style="background-color:#A6D492;border-radius:0px;">a</td>
+      <td style="background-color:#A6D492;border-radius:0px;">b</td>
+      <td>a</td>
+      <td>a</td>
+    </tr>
+  </table>
+</lia-keep>
+
+Die Suche kann nun beendet werden. Der Rest des Textes muss nichtmehr kontrolliert werden, da wir nur wissen wollten, ob das gesuchte Wort vorkommt und nicht, ob es mehrmals drinnen vorkommt.
 
 #### Implementierung
 
